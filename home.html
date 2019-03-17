@@ -1,0 +1,184 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <title>Home</title>    
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">  
+  
+  <script type="text/javascript">
+    function setFocus()
+    {
+       // document.mainform.desc.focus();   // access element of document by name (element with name="desc" of form with name="mainform") and set focus on it
+       document.getElementById("comment").focus();   // access element of document with id="taskdesc" and set focus on it
+       // document.forms[0].elements[0].focus();  // access element of document by position (in case name and id are unavailable or unknown)
+                                                  // (the first form --index 0-- of this document, the first element --index 0-- of this form)
+    }
+  </script>
+  
+  <style>
+    .error {
+       color: red;
+       font-style: italic;
+    }
+  </style>
+  
+</head>
+
+<link rel="stylesheet" href="styles/mystyle.css" />
+
+<body onload="setFocus();"> 
+   <div class="jumbotron">
+            <div class="container">
+                    <div id="todo">
+                            <table id="todoTable" class="table" >
+                              <thead>   <!-- set table headers -->
+                                <tr>
+                                  <th><input type="button" class="btn btn-light" id="home" value="Home"/></th>
+                                  <th><input type="button" class="btn btn-light" id="about" value="About"/></th>
+                                  <th><input type="button" class="btn btn-light" id="photos" value="Photos"/></th>
+                                  <th><input type="button" class="btn btn-light" id="reviews" value="Reviews"/></th>
+                                  <th><input type="button" class="btn btn-light" id="contactUs" value="Contact Us"/></th>
+                                  <th><input type="button" class="btn btn-light" id="donate" value="Donate"/></th>
+                                  <th><input type="button" class="btn btn-light" id="signIn" value="Sign In"/></th>
+                                  <th><input type="button" class="btn btn-light" id="help" value="Help"/></th>
+                                </tr> 
+                              </thead> 
+                            </table> 
+                          </div>
+                        </div>
+            </div>
+   </div>
+
+
+
+  <div class="container">
+
+    <h1>News</h1>
+
+    <p>Blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah 
+            blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
+            blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
+            blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
+            blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
+            blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
+            blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
+            blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
+            blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
+            blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
+    </p>
+
+    <h2>Comments</h2>
+  
+    <form name="mainform" >
+    
+      <div class="form-group">
+        <label for="comment">Write a comment</label>
+        <input type="text" id="comment" class="form-control" name="userComment" contenteditable="true"/>
+        <span class="error" id="comment-note"></span>
+      </div>
+
+      <label for="anonymous">Anonymous?</label><br>
+      <input type="radio" name="anonymous" value="yes"> Yes<br>
+      <input type="radio" name="anonymous" value="no"> No<br>
+      <br></br>
+      <div class="form-group">
+            <label for="comment">Name</label>
+            <input type="text" id="name" class="form-control" name="userName" contenteditable="true"/>
+            <span class="error" id="name-note"></span>
+          </div>
+
+      <input type="button" class="btn btn-light" id="add" value="Post Comment" onclick="addRow()"/> 
+    </form>
+
+    <br/>
+      
+    <div id="commentSection">
+      <table id="comments" class="table" >
+        <thead>   <!-- set table headers -->
+          <tr>
+            <th>Name</th>
+            <th>Comment</th>
+            <th>Date</th>
+            <th>Remove</th>
+          </tr> 
+        </thead>
+        
+      </table> 
+    </div>
+  </div>
+  <br/> 
+  <hr/>
+
+  <script>
+  
+  function addRow()
+  {
+	 // use getElementById() method
+	 // If the element is found, the method will return the element as an object 	 
+	 // If the element is not found, a null is returned	  
+     var comm = document.getElementById("comment").value;
+     var name = document.getElementById("name").value;
+     var date = "3/17/19";
+     var removeoption = "<input type=button value=' X ' onClick='delRow()'>";
+
+     var rowdata = [name, comm, date, removeoption];
+     
+     // Another way to validate taskdesc is to have the checking here 
+     // (instead of using an addEventListener() and the validateTaskDesc() function above).       
+     if (comm === '')    // check if appropriate data are entered
+     {
+        document.getElementById("comment").focus();
+        document.getElementById("comment-note").innerHTML = "Please enter a comment";
+     } 
+     if (name === '')    // check if appropriate data are entered
+     {
+        document.getElementById("name-note").innerHTML = "Please enter your name";
+     } 
+     else
+     {
+           // find a <table> element to add row to (in this example, a table with id="todoTable")
+           var tableRef = document.getElementById("comments");
+     
+           // create an empty <tr> element and add it to the table
+           // using insertRow(index) method
+           var newRow = tableRef.insertRow(tableRef.rows.length);    // table_object.rows.length returns the number of <tr> elements in the collection
+           // add event listener, on mouseover, set row index. This will be used when deleting a row
+           newRow.onmouseover = function() { 
+        	  // rowIndex returns the position of a row in the rows collection of a table
+              tableRef.clickedRowIndex = this.rowIndex;     
+           };    
+           // alternatively, use data-index to store index of the line 
+           //  (note: data-* attributes can store arbitrary data with elements)
+           // eg: <div id="elem" data-index=3></div>
+          
+           var newCell = "";       
+           var i = 0;
+           // insert new cells (<td> elements) at the 1st, 2nd, 3rd, 4th position of the new <tr> element
+           // using insertCell(method) method        	      
+           while (i < 4)
+           {
+              newCell = newRow.insertCell(i);
+              newCell.innerHTML = rowdata[i];
+              newCell.onmouseover = this.rowIndex;
+              i++;
+           }
+        }
+     }  
+  
+  function delRow()
+  {
+     // since deletion action is unrecoverable, add hesitation to minimize/avoid user error 
+	 if (confirm("Are you sure you want to delete?") == true)   
+        document.getElementById("comments").deleteRow(document.getElementById("comments").clickedRowIndex);
+  }
+  
+  
+  
+  </script>
+  </body>
+</html>
