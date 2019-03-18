@@ -1,8 +1,63 @@
 .jumbotron {
     padding-top: 10px;
     padding-bottom: 1px;
+    background: #6b5f5f;
+    color: #ac1515;
 }
 
-h1, h2 {
+h1, h2, h3 {
     text-align: center;
+}
+
+.donBody {
+    background: #c46868;
+    color: white;
+}
+
+.donH1 {
+    color: #ac1515;
+    font-weight: bold;
+    text-align: center;
+}
+
+.donH3 {
+    text-align: center;
+    font-weight: bold;
+    color: #ac1515;
+    background-color: #c46868;
+}
+
+.donP {
+    text-align: center;
+    color: white;
+    background-color: #c46868;
+}
+
+
+.btn-primary {
+    color: white;
+    background-color: transparent;
+    border-color: white;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    align-self: center;
+}
+
+img {
+    border-radius: 10px;
+    /*transform: scale(0.75, 0.75);*/
+    width: 95%;
+    padding: 10px 0px 10px 0px;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+ }
+
+.img2 {
+    /*transform: scale(0.65, 0.65);*/
+    width: 65%;
+    padding: 10px 0px 10px 0px;
+    text-align: center;
+    margin-left: 45px;
+    margin-right: auto;
 }
