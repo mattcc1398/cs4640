@@ -43,7 +43,7 @@ h1, h2, h3 {
     align-self: center;
 }
 
-img {
+.img1 {
     border-radius: 10px;
     /*transform: scale(0.75, 0.75);*/
     width: 95%;
