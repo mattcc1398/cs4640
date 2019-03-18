@@ -13,10 +13,7 @@
   <script type="text/javascript">
     function setFocus()
     {
-       // document.mainform.desc.focus();   // access element of document by name (element with name="desc" of form with name="mainform") and set focus on it
-       document.getElementById("comment").focus();   // access element of document with id="taskdesc" and set focus on it
-       // document.forms[0].elements[0].focus();  // access element of document by position (in case name and id are unavailable or unknown)
-                                                  // (the first form --index 0-- of this document, the first element --index 0-- of this form)
+       document.getElementById("comment").focus(); 
     }
   </script>
   
@@ -31,12 +28,23 @@
 
 <link rel="stylesheet" href="styles/mystyle.css" />
 
-<body onload="setFocus();"> 
+<body> 
+
+<h1>ALPHA SIGMA PHI</h1>
+
+<h2>Zeta Upsilon Chapter 
+    <div class="5u 12u(medium)">
+        <img src="asig.jpg" width="300px" height="300px">
+    </div>
+</h2>
+
+<h3>University of Virginia</h3>
+
    <div class="jumbotron">
             <div class="container">
                     <div id="todo">
                             <table id="todoTable" class="table" >
-                              <thead>   <!-- set table headers -->
+                              <thead>
                                 <tr>
                                   <th><input type="button" class="btn btn-light" id="home" value="Home"/></th>
                                   <th><input type="button" class="btn btn-light" id="about" value="About"/></th>
@@ -60,20 +68,30 @@
 
     <h1>News</h1>
 
-    <p>Blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah 
-            blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
-            blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
-            blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
-            blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
-            blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
-            blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
-            blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
-            blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
-            blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
+    <p>We are excited to announce our partnership with Chipotle to promote brain cancer research. This Monday, 3/18/19,
+        from 5-9PM, 1/3 of all profits made by the Chipotle on Barracks Road will be donated to The American Brain 
+        Tumor Association at no additional cost to you. Please come and support the cause!
     </p>
 
     <h2>Comments</h2>
   
+  
+    <div id="commentSection">
+            <table id="comments" class="table" >
+              <thead> 
+                <tr>
+                  <th>Name</th>
+                  <th>Comment</th>
+                  <th>Date</th>
+                  <th>Remove</th>
+                </tr> 
+              </thead>
+              
+            </table> 
+    </div>
+
+    <br></br>
+
     <form name="mainform" >
     
       <div class="form-group">
@@ -82,10 +100,6 @@
         <span class="error" id="comment-note"></span>
       </div>
 
-      <label for="anonymous">Anonymous?</label><br>
-      <input type="radio" name="anonymous" value="yes"> Yes<br>
-      <input type="radio" name="anonymous" value="no"> No<br>
-      <br></br>
       <div class="form-group">
             <label for="comment">Name</label>
             <input type="text" id="name" class="form-control" name="userName" contenteditable="true"/>
@@ -96,88 +110,73 @@
     </form>
 
     <br/>
-      
-    <div id="commentSection">
-      <table id="comments" class="table" >
-        <thead>   <!-- set table headers -->
-          <tr>
-            <th>Name</th>
-            <th>Comment</th>
-            <th>Date</th>
-            <th>Remove</th>
-          </tr> 
-        </thead>
-        
-      </table> 
-    </div>
   </div>
   <br/> 
   <hr/>
 
   <script>
-  
-  function addRow()
-  {
-	 // use getElementById() method
-	 // If the element is found, the method will return the element as an object 	 
-	 // If the element is not found, a null is returned	  
-     var comm = document.getElementById("comment").value;
-     var name = document.getElementById("name").value;
-     var date = "3/17/19";
-     var removeoption = "<input type=button value=' X ' onClick='delRow()'>";
+    function addRow()
+        {
+        var comm = document.getElementById("comment").value;
+        var name = document.getElementById("name").value;
+        var date = new Date();
+        var dd = String(date.getDate()).padStart(2, '0');
+        var mm = String(date.getMonth() + 1).padStart(2, '0'); //January is 0!
+        var yyyy = date.getFullYear();
+        date = mm + '/' + dd + '/' + yyyy;
+        
+        var removeoption = "<input type=button value=' X ' onClick='delRow()'>";
 
-     var rowdata = [name, comm, date, removeoption];
-     
-     // Another way to validate taskdesc is to have the checking here 
-     // (instead of using an addEventListener() and the validateTaskDesc() function above).       
-     if (comm === '')    // check if appropriate data are entered
-     {
-        document.getElementById("comment").focus();
-        document.getElementById("comment-note").innerHTML = "Please enter a comment";
-     } 
-     if (name === '')    // check if appropriate data are entered
-     {
-        document.getElementById("name-note").innerHTML = "Please enter your name";
-     } 
-     else
-     {
-           // find a <table> element to add row to (in this example, a table with id="todoTable")
-           var tableRef = document.getElementById("comments");
-     
-           // create an empty <tr> element and add it to the table
-           // using insertRow(index) method
-           var newRow = tableRef.insertRow(tableRef.rows.length);    // table_object.rows.length returns the number of <tr> elements in the collection
-           // add event listener, on mouseover, set row index. This will be used when deleting a row
-           newRow.onmouseover = function() { 
-        	  // rowIndex returns the position of a row in the rows collection of a table
-              tableRef.clickedRowIndex = this.rowIndex;     
-           };    
-           // alternatively, use data-index to store index of the line 
-           //  (note: data-* attributes can store arbitrary data with elements)
-           // eg: <div id="elem" data-index=3></div>
+        var rowdata = [name, comm, date, removeoption];
           
-           var newCell = "";       
-           var i = 0;
-           // insert new cells (<td> elements) at the 1st, 2nd, 3rd, 4th position of the new <tr> element
-           // using insertCell(method) method        	      
-           while (i < 4)
-           {
-              newCell = newRow.insertCell(i);
-              newCell.innerHTML = rowdata[i];
-              newCell.onmouseover = this.rowIndex;
-              i++;
-           }
+        if (comm === '')
+        {
+            document.getElementById("comment").focus();
+            document.getElementById("comment-note").innerHTML = "Please enter a comment";
+        } 
+        if (name === '')
+        {
+            document.getElementById("name-note").innerHTML = "Please enter your name";
+        } 
+        if (name !== '') {
+            document.getElementById("name-note").innerHTML = "";
         }
-     }  
-  
-  function delRow()
-  {
-     // since deletion action is unrecoverable, add hesitation to minimize/avoid user error 
-	 if (confirm("Are you sure you want to delete?") == true)   
-        document.getElementById("comments").deleteRow(document.getElementById("comments").clickedRowIndex);
-  }
-  
-  
+
+        if (comm !== '') {
+            document.getElementById("comment-note").innerHTML = "";
+        }
+
+        if (name !== '' && comm !== '')
+        {
+            var tableRef = document.getElementById("comments");
+        
+            var newRow = tableRef.insertRow(tableRef.rows.length);
+            
+            newRow.onmouseover = function() { 
+                tableRef.clickedRowIndex = this.rowIndex;     
+            };    
+            
+            var newCell = "";       
+            var i = 0;
+            	      
+            while (i < 4)
+            {
+                newCell = newRow.insertCell(i);
+                newCell.innerHTML = rowdata[i];
+                newCell.onmouseover = this.rowIndex;
+                i++;
+            }
+            document.getElementById("comment").value = '';
+            document.getElementById("name").value = '';
+        }
+            
+    }  
+    
+    function delRow()
+    {
+        if (confirm("Are you sure you want to delete?") == true)   
+            document.getElementById("comments").deleteRow(document.getElementById("comments").clickedRowIndex);
+    }
   
   </script>
   </body>
