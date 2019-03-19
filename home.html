@@ -5,7 +5,6 @@
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <title>Home</title>
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
-      
       <!--This function directs the cursor to the comment box-->
       <script type="text/javascript">
          function setFocus()
@@ -45,7 +44,7 @@
                         <th><input type="button" class="btn btn-primary" id="reviews" value="Reviews"/></th>
                         <th><input type="button" class="btn btn-primary" id="contactUs" value="Contact Us"/></th>
                         <th><input type="button" onclick="location.href='donate.html';"class="btn btn-primary" id="donate" value="Donate"/></th>
-                        <th><input type="button" class="btn btn-primary" id="signIn" value="Sign In"/></th>
+                        <th><input type="button" class="btn btn-primary" id="signIn" value="Sign In" onclick="location.href='login.html';"/></th>
                         <th><input type="button" class="btn btn-primary" id="help" value="Help"/></th>
                      </tr>
                   </thead>
@@ -74,9 +73,11 @@
                </thead>
             </table>
          </div>
+         <!--Tracks number of comments in log-->
          <p>Comment count</p>
          <p id="count"></p>
          <br></br>
+         <!--Form for adding user comments-->
          <form name="mainform" >
             <div class="form-group">
                <label for="comment">Write a comment</label>
@@ -88,6 +89,7 @@
                <input type="text" id="name" class="form-control" name="userName" contenteditable="true"/>
                <span class="error" id="name-note"></span>
             </div>
+            <!--When the comment is posted, call addRow function to insert row in comment log-->
             <input type="button" class="btn btn-light" id="add" value="Post Comment" onclick="addRow()"/> 
          </form>
          <br/>
@@ -105,9 +107,10 @@
              var yyyy = date.getFullYear();
              date = mm + '/' + dd + '/' + yyyy;
              
+            //Contents of each row
              var removeoption = "<input type=button value=' X ' onClick='delRow()'>";
              var rowdata = [name, comm, date, removeoption];
-               
+            //Input validation
              if (comm === '')
              {
                  document.getElementById("comment").focus();
@@ -117,18 +120,21 @@
              {
                  document.getElementById("name-note").innerHTML = "Please enter your name";
              } 
+            //Clear error messages
              if (name !== '') {
                  document.getElementById("name-note").innerHTML = "";
              }
              if (comm !== '') {
                  document.getElementById("comment-note").innerHTML = "";
              }
+             //If both fields are filled
              if (name !== '' && comm !== '')
              {
                  var tableRef = document.getElementById("comments");
              
                  var newRow = tableRef.insertRow(tableRef.rows.length);
                  
+                //Anonymous function
                  newRow.onmouseover = function() { 
                      tableRef.clickedRowIndex = this.rowIndex;     
                  };    
@@ -146,24 +152,25 @@
                  document.getElementById("comment").value = '';
                  document.getElementById("name").value = '';
              }
-             
+             //Arrow function
              var tableLength = () => document.getElementById("comments").rows.length - 1; 
              document.getElementById("count").innerHTML = tableLength();
              console.log(document.getElementById("comments").rows.length - 1);
                  
          }  
       </script>
-
       <script>
-         function delRow()
-         {
-             if (confirm("Are you sure you want to delete?") == true)   
-                 document.getElementById("comments").deleteRow(document.getElementById("comments").clickedRowIndex);
-
-             var tableLength = () => document.getElementById("comments").rows.length - 1; 
-             document.getElementById("count").innerHTML = tableLength();
-             console.log(document.getElementById("comments").rows.length - 1);    
-         }
+         //Delete row in comment log
+          function delRow()
+          {
+              if (confirm("Are you sure you want to delete?") == true)   
+                  document.getElementById("comments").deleteRow(document.getElementById("comments").clickedRowIndex);
+         
+              var tableLength = () => document.getElementById("comments").rows.length - 1; 
+              document.getElementById("count").innerHTML = tableLength();
+              //For testing
+              console.log(document.getElementById("comments").rows.length - 1);    
+          }
       </script>
       </script>
    </body>
