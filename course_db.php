@@ -32,18 +32,21 @@ function updatePword($uname, $pword, $newPword)
 function forgotPword($uname){
    global $db;
 
-   $username = "dtmccs4640"; 
-   $password = "pwordfor4640"; 
-   $database = "dtmccs4640"; 
-   $mysqli = new mysqli("localhost", $username, $password, $database); 
-   $query = "SELECT email FROM users WHERE username=:uname";
+   $user = $uname;
 
-
-   $result = $mysqli->query($query);
-   echo "this is the result: " . $result;
+   $con=mysqli_connect("localhost", "dtmccs4640", "pwordfor4640", "dtmccs4640");
+   if(!$con) {
+      echo "could not connect.";
    }
 
+   $query = "SELECT email FROM users WHERE username= '$_POST[uname]'";
+   $result = mysqli_query($con, $query) or die(mysqli_error($con));
+   $flag = FALSE;
+   while ($row=mysqli_fetch_array($result, MYSQLI_BOTH)){
+      echo "Your password has been sent to: " . $row['email'];
+   }
 
+}
 function login($uname, $psw){
    
 }
