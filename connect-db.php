@@ -1,12 +1,11 @@
 <?php
+
 $hostname = 'localhost';
+$dbname = 'mattcc1398';
+$username = 'mattcc1398';
+$password = NULL;
 
-$dbname = 'dtmccs4640';
-
-$username = 'dtmccs4640';
-$password = 'pwordfor4640';
-
-$dsn = "mysql:host=$hostname;dbname=dtmccs4640";
+$dsn = "mysql:host=$hostname;dbname=mattcc1398";
 
 try{
     $db = new PDO($dsn, $username, $password);

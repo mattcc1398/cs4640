@@ -45,8 +45,8 @@
                         <th><input type="button" class="btn btn-primary" id="reviews" value="Reviews"/></th>
                         <th><input type="button" class="btn btn-primary" id="contactUs" value="Contact Us"/></th>
                         <th><input type="button" onclick="location.href='donate.html';"class="btn btn-primary" id="donate" value="Donate"/></th>
-                        <th><input type="button" class="btn btn-primary" id="signIn" value="Sign In" onclick="location.href='login.html';"/></th>
-                        <th><input type="button" class="btn btn-primary" id="help" value="Help"/></th>
+                        <th><input type="button" class="btn btn-primary" id="signIn" value="Sign In" onclick="location.href='login.php';"/></th>
+                        <th><input type="button" class="btn btn-primary" id="help" value="Help" onclick="location.href='help.php';"/></th>
                      </tr>
                   </thead>
                </table>

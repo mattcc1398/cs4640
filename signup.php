@@ -33,7 +33,7 @@ require('course_db.php');
    if (!empty($_POST['action']) && ($_POST['action'] == 'Sign Up'))
    {
       addUser($_POST['uname'], $_POST['pword'], $_POST['eml']);
-      header('Location: login.php');
+      header('Location: home.php');
    }
 ?>
 </body>

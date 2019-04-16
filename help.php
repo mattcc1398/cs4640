@@ -22,7 +22,7 @@ require('course_db.php');
                <table id = "todoTable" class = "table">
                   <thead>
                      <tr>
-                        <th><input type="button" class="btn btn-primary" id="home" value="Home" onclick="location.href='home.html';"/></th>
+                        <th><input type="button" class="btn btn-primary" id="home" value="Home" onclick="location.href='home.php;"/></th>
                         <th><input type="button" class="btn btn-primary" id="about" value="About"/></th>
                         <th><input type="button" class="btn btn-primary" id="photos" value="Photos"/></th>
                         <th><input type="button" class="btn btn-primary" id="reviews" value="Reviews"/></th>

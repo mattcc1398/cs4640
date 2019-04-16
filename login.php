@@ -22,7 +22,7 @@ require('course_db.php');
                <table id = "todoTable" class = "table">
                   <thead>
                      <tr>
-                        <th><input type="button" class="btn btn-primary" id="home" value="Home" onclick="location.href='home.html';"/></th>
+                        <th><input type="button" class="btn btn-primary" id="home" value="Home" onclick="location.href='home.php';"/></th>
                         <th><input type="button" class="btn btn-primary" id="about" value="About"/></th>
                         <th><input type="button" class="btn btn-primary" id="photos" value="Photos"/></th>
                         <th><input type="button" class="btn btn-primary" id="reviews" value="Reviews"/></th>
@@ -41,53 +41,50 @@ require('course_db.php');
          <h1 class="h1 logH1">Sign In</h1>
       </div>
       <!--a label that allows for the input of a username-->
-      <div class="container">
-         <label for="uname"><b>Username</b></label>
-         <input type="text" placeholder="Enter Username" name="uname" id="uname" required>
-      </div>
-      <!--a label that allows for the input of a password-->
-      <div class="container">
-         <label for="psw"><b>Password</b></label>
-         <input type="password" placeholder="Enter Password" name="psw" id="psw" required>
-      </div>
       <!--a button that calls the JavaScript function signIn()-->
-      <div class="container">    
-         <button type="submit" value="Login" name="action">Login</button>
-         <!--the Cancel button take the user back to the home screen-->
-         <button type="button" class="cancelbtn" onclick="location.href='home.html';">Cancel</button>
-         <p id="alert"></p>
+      <div class="container">
+         <form action="<?php $_SERVER['PHP_SELF'] ?>" method="post"> 
+         <label>Username: </label>
+            <input type="text" name="uname" required /> <br/>  
+         <label>Password: </label>
+            <input type="password" name="pword" required /> <br/>         
+            <input type="submit" value="Login" name="action"  />   
+         </form>
+         <br>
       </div>
       <div class="container">
          <button type="submit" onclick="location.href='signup.php';">First time? Click here!</button>
       </div>
 
       <?php
-      if (isset($_POST["Login"]) ){
-        $host = "localhost";
-        $username = "dtmccs4640";
-        $password = "pwordfor4640";
-        $dbname = "dtmccs4640";
-        $conn = new mysqli($host, $username, $password, $dbname);
-        if ($conn->connect_error) {
-          die("Connection failed: " . $conn->connect_error);
-        }
-        if (isset($_POST["Login"])){
-          $uname = $conn->escape_string($_POST['username']);
-          $sql = "SELECT password FROM users
-          WHERE username ='" .$uname."'";
-          $result = $conn->query($sql);
-          while($row = $result->fetch_assoc())
-          {
-            $passwordReq =  $row['password'];
-          }
-        echo "this is the password:" . $passwordReq;
-        }
-    }
-        
-        
-       // {
-       //     login($_POST['uname'], $_POST['psw']);
-       // }
+      session_start();
+
+      if (isset($_POST['uname'])) {
+         $user = trim($_POST['uname']);
+         if (!ctype_alnum($user))   // ctype_alnum() check if the values contain only alphanumeric data
+            echo "Username must be alphanumeric only please. <br>";
+         
+         if (isset($_POST['pword']))
+         {
+            $pwd = trim($_POST['pword']);
+            if (!ctype_alnum($pwd))
+               echo "Password must be alphanumeric only please. <br>";
+            else
+            {
+               $_SESSION['user'] = $user;
+               $_SESSION['pwd'] = $pwd;
+         
+               // relocate the browser to another page using the header() function to specify the target URL
+               //header('Location: session-get.php');    
+            }
+         }
+      }
+
+      if (!empty($_POST['action']) && ($_POST['action'] == 'Login'))
+      {
+         login($_POST['uname'], $_POST['pword']);
+      }
+      
       ?>
 
       <!--<script>
