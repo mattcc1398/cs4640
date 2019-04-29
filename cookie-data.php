@@ -1,5 +1,8 @@
+<!--Matthew Castello (mcc8ny) and Danny Thompson (djt5pf)-->
+
 <?php
 
+// Loop through cookies, showing data for each one
 if (count($_COOKIE) > 0)
 {
    echo '<dl>';

@@ -1,3 +1,5 @@
+<!--Matthew Castello (mcc8ny) and Danny Thompson (djt5pf)-->
+
 <?php
 require('connect-db.php');
 require('course_db.php');   
@@ -45,10 +47,11 @@ require('course_db.php');
       <div class="container">
          <form action="<?php $_SERVER['PHP_SELF'] ?>" method="post"> 
          <label>Username: </label>
-            <input type="text" name="uname" required /> <br/>  
+            <input type="text" name="uname"/> <br/>  
          <label>Password: </label>
-            <input type="password" name="pword" required /> <br/>         
-            <input type="submit" value="Login" name="action"  />   
+            <input type="password" name="pword"/> <br/>         
+            <input type="submit" value="Login" name="action"  />
+            <input type="submit" value="Logout" name="action2" />   
          </form>
          <br>
       </div>
@@ -59,51 +62,39 @@ require('course_db.php');
       <?php
       session_start();
 
-      if (isset($_POST['uname'])) {
+      if (isset($_POST['uname']) && (!empty($_POST['action']))) {
          $user = trim($_POST['uname']);
          if (!ctype_alnum($user))   // ctype_alnum() check if the values contain only alphanumeric data
             echo "Username must be alphanumeric only please. <br>";
          
-         if (isset($_POST['pword']))
+         if (isset($_POST['pword']) && (!empty($_POST['action'])))
          {
             $pwd = trim($_POST['pword']);
             if (!ctype_alnum($pwd))
                echo "Password must be alphanumeric only please. <br>";
             else
             {
+               // Set session variables to save session
                $_SESSION['user'] = $user;
                $_SESSION['pwd'] = $pwd;
          
                // relocate the browser to another page using the header() function to specify the target URL
-               //header('Location: session-get.php');    
             }
          }
       }
-
+      // Display who is logged in and log out if button is pressed
       if (!empty($_POST['action']) && ($_POST['action'] == 'Login'))
       {
          login($_POST['uname'], $_POST['pword']);
       }
+      if (isset($_SESSION['user']) && empty($_POST['action2'])) {
+         echo "<br>";
+         echo "Logged in as " . $_SESSION['user'];
+      } else if (isset($_SESSION['user']) && !empty($_POST['action2']) && $_POST['action2'] == 'Logout') {
+         logout();
+      }
+
       
       ?>
-
-      <!--<script>
-         /*function that checks the values entered into */
-         function signIn(){
-             var username = document.getElementById("uname").value;
-             var password = document.getElementById("psw").value;
-         
-            /*if a field is empty, a message will tell them to enter a valid input.*/
-             if(username == "" || password == ""){
-                 document.getElementById("alert").innerHTML = "Please Enter a Username and/or Password."
-             }
-             /*if both are entered, it provides feedback and clears the fields.*/
-             else{
-                 document.getElementById("alert").innerHTML = "You have successfully logged in!"
-                 document.getElementById("uname").value = '';
-                 document.getElementById("psw").value = '';
-             }
-         }
-      </script>-->
    </body>
 </html>

@@ -1,10 +1,12 @@
+<!--Matthew Castello (mcc8ny) and Danny Thompson (djt5pf)-->
+
 <?php
 session_start();
 // Define a function to handle failed validation attempts 
 function reject($entry)
 {
-   echo 'Please leave';
-   //exit();    // exit the current script, no value is returned
+   echo 'Exiting';
+   exit();    // exit the current script, no value is returned
 }
 
 if (isset($_SESSION['user']))

@@ -1,4 +1,8 @@
+<!--Matthew Castello (mcc8ny) and Danny Thompson (djt5pf)-->
+
 <?php
+
+// Add new user to database
 function addUser($uname, $pword, $eml)
 {
    global $db;
@@ -11,6 +15,8 @@ function addUser($uname, $pword, $eml)
    $statement->closeCursor();
  
 }
+
+// Update a given user's password in database
 function updatePword($uname, $pword, $newPword)
 {
    global $db;	
@@ -23,6 +29,8 @@ function updatePword($uname, $pword, $newPword)
    $statement->execute();
    $statement->closeCursor();
 }
+
+// Finds email of user (if it exists) and sends an email to the user's address so they can reset password
 function forgotPword($uname){
    global $db;
    $user = $uname;
@@ -36,6 +44,8 @@ function forgotPword($uname){
       echo "Your password has been sent to: " . $row['email'];
    }
 }
+
+// Login an existing user
 function login($uname, $password){
    global $db;
    $user = $uname;
@@ -57,5 +67,32 @@ function login($uname, $password){
    } else {
       echo "Username or password are incorrect.";
    }
+}
+
+// Destroys session and cookie from a signed in user
+function logout() {
+   if (count($_COOKIE) > 0)
+{
+   foreach ($_COOKIE as $key => $value)
+   {
+   	  // Deletes the variable (array element) where the value is stored in this PHP.
+   	  // However, the original cookie still remains intact in the browser.
+   	  // unset($_COOKIE[$key]);    
+   	
+      // To completely remove cookies from the client, set the expiration time to be in the past
+      setcookie($key, '', time() - 3600);  
+   }
+}
+if (count($_SESSION) > 0)
+{   
+   foreach ($_SESSION as $key => $value)
+   {
+      // Deletes the variable (array element) where the value is stored in this PHP.
+      // However, the session object still remains on the server.    	
+      unset($_SESSION[$key]);
+   }      
+   session_destroy();     // complete terminate the session
+}
+   echo "Successfully logged out";
 }
 ?>

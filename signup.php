@@ -1,8 +1,10 @@
+<!--Matthew Castello (mcc8ny) and Danny Thompson (djt5pf)-->
+
 <?php
 require('connect-db.php');
 require('course_db.php');   
 ?>
-
+<!--For users who do not yet have an account in the DB-->
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,11 +27,13 @@ require('course_db.php');
       <input type="text" name="pword" size="40" required /> <br/>
       <label>Email: </label>      
       <input type="text" name="eml" size="40" required /> <br/>              
-      <input type="submit" value="Sign Up" name="action"  />   
+      <input type="submit" value="Sign Up" name="action"  />
+      <input type="submit" value="Return to Sign in" onclick="location.href='login.php';" />   
   </form>
 
   </div>
 <?php
+// Calls addUser function from course_db to enter new user into DB
    if (!empty($_POST['action']) && ($_POST['action'] == 'Sign Up'))
    {
       addUser($_POST['uname'], $_POST['pword'], $_POST['eml']);

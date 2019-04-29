@@ -1,3 +1,5 @@
+<!--Matthew Castello (mcc8ny) and Danny Thompson (djt5pf)-->
+
 <?php
 require('connect-db.php');
 require('course_db.php');   

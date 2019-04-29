@@ -1,5 +1,8 @@
+<!--Matthew Castello (mcc8ny) and Danny Thompson (djt5pf)-->
+
 <?php
 
+// Paramters needed to connect to DB
 $hostname = 'localhost';
 $dbname = 'mattcc1398';
 $username = 'mattcc1398';

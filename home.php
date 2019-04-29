@@ -60,6 +60,7 @@
             from 5-9PM, 1/3 of all profits made by the Chipotle on Barracks Road will be donated to The American Brain 
             Tumor Association at no additional cost to you. Please come and support the cause!
          </p>
+         <!--Form for submitting comments-->
          <form action="<?php $_SERVER['PHP_SELF']?>" method="post">
             <dl>
                <dt>Name:
@@ -75,11 +76,11 @@
                          echo $_POST['userComment'];
                      ?>"></textarea> </dd>
             </dl>
-            <input type="submit" class="btn btn-light" id="add" value="Post Comment" onclick="addRow()"/> 
+            <input type="submit" class="btn btn-light" id="add" value="Post Comment"/> 
          </form>
          <?php
             $name = $comment = NULL;
-          
+            // Serverside input validation
             if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 if (empty($_POST['userName']))
                     echo "Please enter your name <br />";
@@ -97,6 +98,7 @@
       <br/> 
       <hr/>
       <?php
+      // Post comments from php form to page
          if ($_SERVER['REQUEST_METHOD'] == 'POST') {
              $comment = $_POST['userComment'];
              $name = $_POST['userName'];
