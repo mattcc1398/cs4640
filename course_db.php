@@ -1,7 +1,6 @@
 <!--Matthew Castello (mcc8ny) and Danny Thompson (djt5pf)-->
 
 <?php
-
 // Add new user to database
 function addUser($uname, $pword, $eml)
 {
@@ -62,6 +61,8 @@ function login($uname, $password){
    }
    
    if ($foundPsw == $password && $foundPsw != NULL) {
+      $_SESSION['user'] = $uname;
+      $_SESSION['pwd'] = $password;
       echo $uname . ", you have successfully logged in! <br>";
       echo '<a href="cookie-set.php">View Cookie</a>';
    } else {

@@ -72,14 +72,6 @@ require('course_db.php');
             $pwd = trim($_POST['pword']);
             if (!ctype_alnum($pwd))
                echo "Password must be alphanumeric only please. <br>";
-            else
-            {
-               // Set session variables to save session
-               $_SESSION['user'] = $user;
-               $_SESSION['pwd'] = $pwd;
-         
-               // relocate the browser to another page using the header() function to specify the target URL
-            }
          }
       }
       // Display who is logged in and log out if button is pressed
