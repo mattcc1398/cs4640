@@ -24,11 +24,11 @@ require('course_db.php');
                <table id = "todoTable" class = "table">
                   <thead>
                      <tr>
-                        <th><input type="button" class="btn btn-primary" id="home" value="Home" onclick="location.href='home.php;"/></th>
+                        <th><input type="button" class="btn btn-primary" id="home" value="Home" onclick="location.href='home.php';"/></th>
                         <th><input type="button" class="btn btn-primary" id="about" value="About"/></th>
                         <th><input type="button" class="btn btn-primary" id="photos" value="Photos"/></th>
                         <th><input type="button" class="btn btn-primary" id="reviews" value="Reviews"/></th>
-                        <th><input type="button" class="btn btn-primary" id="contactUs" value="Contact Us"/></th>
+                        <th><input type="button" class="btn btn-primary" id="subscribe" value="Subscribe" onclick="location.href='http://localhost:4200';"/></th>
                         <th><input type="button" class="btn btn-primary" id="donate" value="Donate" onclick="location.href='donate.html';"/></th>
                         <th><input type="button" class="btn btn-primary" id="signIn" value="Sign In" onclick="location.href='login.php';"/></th>
                         <th><input type="button" class="btn btn-primary" id="help" value="Help"/></th>
@@ -48,5 +48,6 @@ require('course_db.php');
       <div class="container">
           <button type="submit" onclick="location.href='forgot.php';">Forgot Password?</button>
       </div>
+
     </body>
 </html>
