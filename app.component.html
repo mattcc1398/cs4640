@@ -1,11 +1,9 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
+<div class="container">
+  <h1 [ngStyle]="{'background-color':'green'}">
+    {{ title }}
   </h1>
-</div>
-<link rel="stylesheet" href="http://localhost/styles/mystyle.css" />
-<div class="jumbotron">
+  <link rel="stylesheet" href="http://localhost/styles/mystyle.css" />
+  <div class="jumbotron">
     <div class="container">
        <div id="todo">
           <table id="todoTable" class="table" >
@@ -24,4 +22,31 @@
           </table>
        </div>
     </div>
- </div>
+
+  Display data received from the back end <br/>
+  response data = {{ responsedata | json}}
+  <br/>
+  <hr/>
+  Data binding
+  <br/>
+  {{ orderForm.value | json }}
+  <br/>
+  {{ orderModel | json }} 
+  <hr/>
+
+  <form #orderForm="ngForm">
+    <div class="form-group">
+      <label>Email: </label>
+      <input [(ngModel)]="orderModel.email" type="email" class="form-control" name="email">
+    </div>
+
+    <div class="form-group">
+      <select [(ngModel)]="orderModel.time" class="custom-select" name="time">
+        <option value="">How often would you like to receive emails? </option>
+        <option *ngFor="let time of times">{{time}} </option>
+      </select>
+    </div>
+    <button class="btn btn-primary" (click)="senddata(orderForm.value)">Subscribe</button>
+  </form>
+
+</div>
